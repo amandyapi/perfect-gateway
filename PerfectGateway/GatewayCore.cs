@@ -117,7 +117,10 @@ namespace PerfectGateway
                 context[(object) "erreur"] = (object) context.Description;
                Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + (CodeClient1 + " " + numerocompte + "   " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])) + " " + str2 + " " + context.Status.ToString() + " " + (object) 6 + " " + context.Description), 1);
                 BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
-               Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + responseModel1.Data.SoldeDisponible, 1);
+
+                //CustomBillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
+               
+                Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + responseModel1.Data.SoldeDisponible, 1);
                 break;
               }
               context.Status = IBP.SDKGatewayLibrary.State.AccountNotExists;

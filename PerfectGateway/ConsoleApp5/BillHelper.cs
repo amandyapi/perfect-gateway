@@ -156,5 +156,7 @@ namespace ConsoleApp5
     }
 
     private static string GetConnectionString() => "Data Source=" + "sk-dbs-001.skautomate.com" + ";Initial Catalog=" + "AdecDb" + ";Persist Security Info=True;User ID=" + "connexionString" + ";Password=" + "AZERTY225@a";
-  }
+
+    
+    }
 }
