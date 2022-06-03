@@ -1,0 +1,16 @@
+{
+  "clientCode": "string",
+  "clientAccount": "string",
+  "creditAccount": "string",
+  "operationRef": "string",
+  "status": 0,
+  "note_10000": 0,
+  "note_5000": 0,
+  "note_2000": 0,
+  "note_1000": 0,
+  "kioskId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "operationType": 0,
+  "serviceId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+
+//return 3fa85f64-5717-4562-b3fc-2c963f66afa6
