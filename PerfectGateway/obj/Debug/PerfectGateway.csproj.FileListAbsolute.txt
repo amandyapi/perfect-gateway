@@ -1,0 +1,10 @@
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\bin\Debug\PerfectGateway.dll
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\bin\Debug\PerfectGateway.pdb
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\bin\Debug\Newtonsoft.Json.dll
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\bin\Debug\SDKGatewayLibrary.dll
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\bin\Debug\Newtonsoft.Json.xml
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Debug\PerfectGateway.csproj.CoreCompileInputs.cache
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Debug\PerfectGateway.csproj.CopyComplete
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Debug\PerfectGateway.dll
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Debug\PerfectGateway.pdb
+C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Debug\PerfectGateway.csprojAssemblyReference.cache

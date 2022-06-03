@@ -1,0 +1,12 @@
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\bin\Release\PerfectConsole.exe
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\bin\Release\PerfectConsole.pdb
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\bin\Release\PerfectGateway.dll
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\bin\Release\SDKGatewayLibrary.dll
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\bin\Release\Newtonsoft.Json.dll
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\bin\Release\PerfectGateway.pdb
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\bin\Release\Newtonsoft.Json.xml
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.csprojAssemblyReference.cache
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.csproj.CoreCompileInputs.cache
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.csproj.CopyComplete
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.exe
+C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.pdb
