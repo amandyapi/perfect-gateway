@@ -15,6 +15,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using PerfectGateway.Models;
+using ConsoleApp5;
 using PerfectGateway.ConsoleApp5;
 
 namespace ConsoleApp5
@@ -52,7 +53,7 @@ namespace ConsoleApp5
             }
         }
 
-        public static string CustomTransaction(
+        public static string Transaction(
           Guid Id,
           string CodeClient,
           string NumeroCompte,
@@ -70,7 +71,7 @@ namespace ConsoleApp5
             )
         {
             int num;
-            string base_url = "https://www.sk-automate.tech/paymentsboapi";
+            string base_url = "http://sk-automate.tech/paymentsboapi";
 
             var body = new TransactionModel
             {
@@ -102,7 +103,7 @@ namespace ConsoleApp5
         }
 
 
-        public static int Transaction(
+        public static int OldTransaction(
           Guid Id,
           string CodeClient,
           string NumeroCompte,

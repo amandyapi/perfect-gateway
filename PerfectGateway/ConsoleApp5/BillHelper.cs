@@ -12,12 +12,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Net;
+using System.IO;
+using ConsoleApp5;
+using PerfectGateway.Models;
+using PerfectGateway.ConsoleApp5;
 
 namespace ConsoleApp5
 {
   public static class BillHelper
   {
-    public static int UpdateBorne(
+        public static string _baseUrl = "http://sk-automate.tech/paymentsboapi";
+        public static int UpdateBorne(
       string id,
       int Note_1000,
       int Note_2000,
@@ -48,8 +54,66 @@ namespace ConsoleApp5
       }
     }
 
+    public static string Transaction(
+          Guid Id,
+          string CodeClient,
+          string NumeroCompte,
+          string NumeroCompteCredit,
+          int Note_10000,
+          int Note_5000,
+          int Note_2000,
+          int Note_1000,
+          int montant,
+          Guid kioskId,
+          string OpeRef,
+          string status,
+          int OpeType,
+          string Description
+            )
+        {
+            try
+            {
+                var num = 1;
+                //string base_url = "http://sk-automate.tech/paymentsboapi";
+                num = 8;
+                var body = new TransactionModel
+                {
+                    clientCode = CodeClient,
+                    clientAccount = NumeroCompte,
+                    creditAccount = NumeroCompteCredit,
+                    operationRef = OpeRef,
+                    status = Int32.Parse(status),
+                    note_10000 = Note_10000,
+                    note_5000 = Note_5000,
+                    note_2000 = Note_2000,
+                    note_1000 = Note_1000,
+                    kioskId = kioskId.ToString(),
+                    operationType = OpeType,
+                    serviceId = ""
+                };
 
-    public static int Transaction(
+                var basicToken = CustomBillHelper.GetBasicToken();
+
+                WebRequest request = WebRequest.Create($"{_baseUrl}/transactions");
+
+                request.Headers.Add("Authorization", $"Basic {basicToken}");
+                num = 1;
+                var response = request.Execute<String>(body);
+
+                var transactionId = response.Data;
+                num = 2;
+                return transactionId;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                //foreach (string trace in this._traces)
+                    //Logger.Instance.WriteMessage(trace, 1);
+                throw;
+            }
+        }
+
+    /*public static int Transaction(
       Guid Id,
       string CodeClient,
       string NumeroCompte,
@@ -97,7 +161,7 @@ namespace ConsoleApp5
           return num;
         }
       }
-    }
+    }*/
 
     public static KioskModel GetBorne(Guid id)
     {
