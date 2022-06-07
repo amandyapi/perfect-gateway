@@ -25,7 +25,7 @@ namespace ConsoleApp5
 {
   public static class BillHelper
   {
-        public static string _baseUrl = "http://sk-automate.tech/paymentsboapi";
+        public static string _baseUrl = "https://sk-automate.tech/paymentsboapi";
         public static int UpdateBorne(
       string id,
       int Note_1000,
@@ -71,13 +71,13 @@ namespace ConsoleApp5
           string OpeRef,
           string status,
           int OpeType,
-          string Description
+          string Description,
+          string ServiceId
             )
         {
             try
             {
                 var num = 1;
-                //string base_url = "http://sk-automate.tech/paymentsboapi";
                 num = 8;
                 var body = new TransactionModel
                 {
@@ -92,83 +92,34 @@ namespace ConsoleApp5
                     note_1000 = Note_1000,
                     kioskId = kioskId.ToString(),
                     operationType = OpeType,
-                    serviceId = ""
+                    serviceId = ServiceId//consultation de solde
                 };
 
                 var basicToken = CustomBillHelper.GetBasicToken();
 
-                WebRequest request = WebRequest.Create($"{_baseUrl}/transactions");
+                var url = $"{_baseUrl}/transactions";
+                WebRequest request = WebRequest.Create(url);
+                //var basicAuth = "Basic ZmluZWxsZTpGMW4zbExFQDJ+Iw==";
 
-                request.Headers.Add("Authorization", $"Basic {basicToken}");
+                //request.Headers.Add("Authorization", basicAuth);
+                request.Headers.Add("Authorization: Basic ZmluZWxsZTpGMW4zbExFQDJ+Iw==");
                 num = 1;
                 var response = request.Execute<String>(body);
 
                 var transactionId = response.Data;
-                num = 2;
-                //ClientInfoResponseModel infoResponseModel = JsonConvert.DeserializeObject<ClientInfoResponseModel>(transactionStr2);
                 return transactionId;
+                num = 2;
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
                     //Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
         }
 
-    /*public static int Transaction(
-      Guid Id,
-      string CodeClient,
-      string NumeroCompte,
-      string NumeroCompteCredit,
-      int Note_10000,
-      int Note_5000,
-      int Note_2000,
-      int Note_1000,
-      int montant,
-      Guid kioskId,
-      string OpeRef,
-      string status,
-      int OpeType,
-      string Description)
-    {
-      DateTime dateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd h:mm tt"));
-      string connectionString = BillHelper.GetConnectionString();
-      StringBuilder stringBuilder = new StringBuilder();
-      stringBuilder.Append("INSERT INTO [AdecDb].[monitoring].[Transactions] VALUES ( ");
-      stringBuilder.Append(string.Format("'{0}', ", (object) Id));
-      stringBuilder.Append("'" + CodeClient + "', ");
-      stringBuilder.Append("'" + NumeroCompte + "', ");
-      stringBuilder.Append("'" + NumeroCompteCredit + "', ");
-      stringBuilder.Append(string.Format("{0}, ", (object) Note_10000));
-      stringBuilder.Append(string.Format("{0}, ", (object) Note_5000));
-      stringBuilder.Append(string.Format("{0}, ", (object) Note_2000));
-      stringBuilder.Append(string.Format("{0}, ", (object) Note_1000));
-      stringBuilder.Append(string.Format("{0}, ", (object) montant));
-      stringBuilder.Append(string.Format("'{0}-{1}-{2} {3}:{4}', ", (object) dateTime.Year, (object) dateTime.Month, (object) dateTime.Day, (object) dateTime.Hour, (object) dateTime.Minute));
-      stringBuilder.Append(string.Format("'{0}', ", (object) kioskId));
-      stringBuilder.Append("'07B06B9A-13D8-4CB7-9099-149C92D8B671', ");
-      stringBuilder.Append("'" + OpeRef + "', ");
-      stringBuilder.Append("'" + status + "', ");
-      stringBuilder.Append(string.Format("{0},", (object) OpeType));
-      stringBuilder.Append("'" + Description + "', NULL, NULL, NULL, NULL, NULL ) ");
-      string cmdText = stringBuilder.ToString();
-      Logger.Instance.WriteMessage("\r\n\r\nSQL request " + cmdText, 1);
-      using (SqlConnection connection = new SqlConnection(connectionString))
-      {
-        using (SqlCommand sqlCommand = new SqlCommand(cmdText, connection))
-        {
-          connection.Open();
-          int num = sqlCommand.ExecuteNonQuery();
-          connection.Close();
-          return num;
-        }
-      }
-    }*/
-
     public static string SaveTransaction(
-          ref Context context,
           string CodeClient,
           string NumeroCompte,
           string NumeroCompteCredit,
@@ -182,40 +133,48 @@ namespace ConsoleApp5
           string status,
           int OpeType,
           string Description
-          )
+        )
     {
-            //string credentials = string.Format("{0}", context[(object)"PaymentContext.Payment.Account"]);
-            string apiUrl = $"{_baseUrl}/transactions";
-            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(BaseContext.UserName + ":" + BaseContext.Password));
-
-            string body = JsonConvert.SerializeObject((object) new
+            try
             {
-                clientCode = CodeClient,
-                clientAccount = NumeroCompte,
-                creditAccount = NumeroCompteCredit,
-                operationRef = OpeRef,
-                status = Int32.Parse(status),
-                note_10000 = Note_10000,
-                note_5000 = Note_5000,
-                note_2000 = Note_2000,
-                note_1000 = Note_1000,
-                kioskId = kioskId.ToString(),
-                operationType = OpeType,
-                serviceId = ""//???
-            });
+                string apiUrl = $"{_baseUrl}/transactions";
 
-            using (WebClient webClient = new WebClient())
-            {
-                ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)((_param1, _param2, _param3, _param4) => true);
-                webClient.Headers.Add("content-type", "application/json");
-                webClient.Headers.Add("Authorization", "Basic " + base64String);
+                string body = JsonConvert.SerializeObject((object)new
+                {
+                    clientCode = CodeClient,
+                    clientAccount = NumeroCompte,
+                    creditAccount = NumeroCompteCredit,
+                    operationRef = OpeRef,
+                    status = Int32.Parse(status),
+                    note_10000 = Note_10000,
+                    note_5000 = Note_5000,
+                    note_2000 = Note_2000,
+                    note_1000 = Note_1000,
+                    kioskId = kioskId.ToString(),
+                    operationType = OpeType,
+                    serviceId = "49CE3FED-A477-48D3-9DC9-6BE85FD60DD7"//???
+                });
 
-                string transactionStr2 = webClient.UploadString(apiUrl, "POST", body);
-                ClientInfoResponseModel infoResponseModel = JsonConvert.DeserializeObject<ClientInfoResponseModel>(transactionStr2);
+                using (WebClient webClient = new WebClient())
+                {
+                    ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)((_param1, _param2, _param3, _param4) => true);
+                    //webClient.Headers.Add("content-type", "application/json");
+                    webClient.Headers.Add("Authorization", "Basic " + "ZmluZWxsZTpGMW4zbExFQDJ+Iw==");
 
-                return transactionStr2;
+                    string transactionStr2 = webClient.UploadString(apiUrl, "POST", body);
+                    ClientInfoResponseModel infoResponseModel = JsonConvert.DeserializeObject<ClientInfoResponseModel>(transactionStr2);
+
+                    return transactionStr2;
+                }
             }
-    }
+            catch (Exception ex)
+            {
+                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                //foreach (string trace in this._traces)
+                //Logger.Instance.WriteMessage(trace, 1);
+                throw;
+            }
+        }
 
     public static KioskModel GetBorne(Guid id)
     {

@@ -26,6 +26,8 @@ namespace PerfectGateway
     private List<string> _traces = new List<string>();
     private Dictionary<string, IBP.SDKGatewayLibrary.State> _statesMap = new Dictionary<string, IBP.SDKGatewayLibrary.State>();
 
+    private Dictionary<string, string> _services = new Dictionary<string, string>();
+
     private void FillStates()
     {
       this._statesMap.Add("200", IBP.SDKGatewayLibrary.State.AccountExists);
@@ -38,6 +40,62 @@ namespace PerfectGateway
       this._statesMap.Add("100000", IBP.SDKGatewayLibrary.State.Finalized);
       this._statesMap.Add("100003", IBP.SDKGatewayLibrary.State.Rejected);
       this._statesMap.Add("100009", IBP.SDKGatewayLibrary.State.Rejected);
+    }
+
+    private string GetOperationStatus(IBP.SDKGatewayLibrary.State _state)
+    {
+       var operationState = string.Empty;
+
+       switch (_state)
+       {
+         case IBP.SDKGatewayLibrary.State.AccountExists:
+            operationState = "0";
+            break;
+         case IBP.SDKGatewayLibrary.State.Rejected:
+            operationState = "1";
+            break;
+         case IBP.SDKGatewayLibrary.State.DenialOfService:
+            operationState = "1";
+            break;
+         case IBP.SDKGatewayLibrary.State.Finalized:
+            operationState = "0";
+            break;
+         case IBP.SDKGatewayLibrary.State.AccountNotExists:
+            operationState = "1";
+            break;
+         default:
+            //Logger.Instance.WriteMessage("\r\n\r\nerreur ope", 1);
+            throw new Exception("Ope State not found");
+       }
+       return operationState;
+     }
+
+    private string GetServiceId(RequestMethod requestMethod) 
+    {
+       string serviceId = string.Empty;
+
+       switch (requestMethod) 
+        {
+          case RequestMethod.ConsultationSolde:
+               serviceId = "49CE3FED-A477-48D3-9DC9-6BE85FD60DD7";
+               break;
+          case RequestMethod.Releve:
+               serviceId = "8AF11B1E-C63C-4A96-80B8-2B2C58551EFB";
+               break;
+          case RequestMethod.Depot:
+               serviceId = "E90A271E-95FC-4207-9DFA-766934BC4A13";
+               break;
+          case RequestMethod.Retrait:
+               serviceId = "2D2A7668-DF75-4D9F-8F55-E528CBCF3A6F";
+               break;
+          case RequestMethod.TransfertEntreCompte:
+               serviceId = "79405C40-2861-42CC-9440-5DBC26AE1360";
+               break;
+          default:
+               //Logger.Instance.WriteMessage("\r\n\r\nerreur ope", 1);
+               throw new Exception("Ope Service Id not found");
+         }
+       return serviceId;
     }
 
     private object GetContextValue(Context context, string key) => context[(object) key];
@@ -64,7 +122,9 @@ namespace PerfectGateway
 
     public override void CheckAccount(ref Context context)
     {
-     //Logger.Instance.WriteMessage("\r\n\r\nPerfect Start check account kIOSK ID: " + string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"]), 1);
+       //var serviceId = GetServiceId(RequestMethod.ConsultationSolde);
+       //var transactionResultTest = BillHelper.Transaction(Guid.NewGuid(), "A0106544", "25111060A010654401", " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", "84AB2908-6CE2-4927-BAFA-5C7B0FBB14B1")), "tralalalala", GetOperationStatus(IBP.SDKGatewayLibrary.State.AccountExists), 1, "Test Descrption", serviceId);
+       //Logger.Instance.WriteMessage("\r\n\r\nPerfect Start check account kIOSK ID: " + string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"]), 1);
       try
       {
         if (context[(object) "nom"].ToString() == "0")
@@ -117,15 +177,15 @@ namespace PerfectGateway
                 context[(object) "erreur"] = (object) context.Description;
                 //Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + (CodeClient1 + " " + numerocompte + "   " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])) + " " + str2 + " " + context.Status.ToString() + " " + (object) 6 + " " + context.Description), 1);
 
-                var transactionResult = BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
-                var stop = 0;
+                var transactionResult = BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, GetOperationStatus(context.Status), 1, context.Description, GetServiceId(RequestMethod.ConsultationSolde));
+                //var stop = 0;
                 //Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + responseModel1.Data.SoldeDisponible, 1);
                 break;
               }
               context.Status = IBP.SDKGatewayLibrary.State.AccountNotExists;
               context.Description = responseModel1.Data.DetailReponse;
               context[(object) "erreur"] = (object) context.Description;
-              BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
+              BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, GetOperationStatus(context.Status), 1, context.Description, GetServiceId(RequestMethod.ConsultationSolde));
               break;
             case RequestMethod.Releve:
               string datedebut = context[(object) "Datedebut"].ToString();
@@ -171,7 +231,7 @@ namespace PerfectGateway
                   context[(object) "Note_2000"] = (object) billCountToDispense.BillCount.Bill_2000;
                   context[(object) "Note_1000"] = (object) billCountToDispense.BillCount.Bill_1000;
                   //this.UpdateBillCountFile(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"]), billCountToDispense.BillCount.Bill_10000, billCountToDispense.BillCount.Bill_5000, billCountToDispense.BillCount.Bill_2000, billCountToDispense.BillCount.Bill_1000);
-                  BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", billCountToDispense.BillCount.Bill_10000, billCountToDispense.BillCount.Bill_5000, billCountToDispense.BillCount.Bill_2000, billCountToDispense.BillCount.Bill_1000, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 8, context.Description);
+                  BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", billCountToDispense.BillCount.Bill_10000, billCountToDispense.BillCount.Bill_5000, billCountToDispense.BillCount.Bill_2000, billCountToDispense.BillCount.Bill_1000, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, GetOperationStatus(context.Status), 8, context.Description, GetServiceId(RequestMethod.Retrait));
                   //Logger.Instance.WriteMessage("\r\n\r\n AfterWithdraws status  " + context.Status.ToString(), 1);
                   this.canWihtdraw = "1";
                   //Logger.Instance.WriteMessage("\r\n\r\nAppel de l'api reussi  : " + this.canWihtdraw, 1);
@@ -196,7 +256,7 @@ namespace PerfectGateway
                 status1 = context.Status;
                 string status2 = status1.ToString();
                 string description = context.Description;
-                BillHelper.Transaction(Id, CodeClient2, NumeroCompte, " ", 0, 0, 0, 0, int32, kioskId, OpeRef, status2, 8, description);
+                BillHelper.Transaction(Id, CodeClient2, NumeroCompte, " ", 0, 0, 0, 0, int32, kioskId, OpeRef, GetOperationStatus(context.Status), 8, description, GetServiceId(RequestMethod.Retrait));
                 break;
               }
               context.Status = IBP.SDKGatewayLibrary.State.AccountNotExists;
@@ -216,7 +276,7 @@ namespace PerfectGateway
               status3 = context.Status;
               string status4 = status3.ToString();
               string description1 = context.Description;
-              BillHelper.Transaction(Id1, CodeClient3, NumeroCompte1, " ", 0, 0, 0, 0, int32_1, kioskId1, OpeRef1, status4, 8, description1);
+              BillHelper.Transaction(Id1, CodeClient3, NumeroCompte1, " ", 0, 0, 0, 0, int32_1, kioskId1, OpeRef1, GetOperationStatus(context.Status), 8, description1, GetServiceId(RequestMethod.Retrait));
               break;
             case RequestMethod.TransfertEntreCompte:
               //Logger.Instance.WriteMessage("\r\n\r\nPerfect virement ", 1);
@@ -261,7 +321,7 @@ namespace PerfectGateway
                 context.Description = responseModel4.Data.DetailReponse;
                //Logger.Instance.WriteMessage("\r\n\r\ncontext.Description transfert entre compte: " + context.Description, 1);
                 context[(object) "erreur"] = (object) context.Description;
-                BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, str3, 0, 0, 0, 0, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 14, context.Description);
+                BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, str3, 0, 0, 0, 0, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, GetOperationStatus(context.Status), 14, context.Description, GetServiceId(RequestMethod.TransfertEntreCompte));
                 break;
               }
               context.Status = IBP.SDKGatewayLibrary.State.AccountNotExists;
@@ -270,7 +330,7 @@ namespace PerfectGateway
               context[(object) "erreur"] = (object) context.Description;
               //Logger.Instance.WriteMessage("\r\n\r\nTransfert en tre compte erreur  " + responseModel4.Data.DetailReponse, 1);
 
-              BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 14, context.Description);
+              BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, GetOperationStatus(context.Status), 14, context.Description, GetServiceId(RequestMethod.TransfertEntreCompte));
               break;
             default:
               //Logger.Instance.WriteMessage("\r\n\r\nerreur ope", 1);
@@ -340,7 +400,7 @@ namespace PerfectGateway
             context[(object) "ReferenceReponse"] = (object) responseModel1.Data.ReferenceReponse;
             context[(object) "erreur"] = (object) context.Description;
            Logger.Instance.WriteMessage("\r\n\r\nDepot description: " + context.Description, 1);
-            BillHelper.Transaction(Guid.NewGuid(), CodeClient, numerocompte, " ", 0, 0, 0, 0, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str1, context.Status.ToString(), 3, context.Description);
+            BillHelper.Transaction(Guid.NewGuid(), CodeClient, numerocompte, " ", 0, 0, 0, 0, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str1, GetOperationStatus(context.Status), 3, context.Description, GetServiceId(RequestMethod.Depot));
             break;
           case CodeOperation.WalletToBank:
             ResponseModel<WalletToBankResponse> bank = Service.WalletToBank(str1, numerocompte, montant, msisdn, fraisOperation, pinotp, "Wallet to bank");
