@@ -17,6 +17,9 @@ using System.IO;
 using ConsoleApp5;
 using PerfectGateway.Models;
 using PerfectGateway.ConsoleApp5;
+using Newtonsoft.Json;
+using System.IO.Ports;
+using System.Net.Security;
 
 namespace ConsoleApp5
 {
@@ -102,6 +105,7 @@ namespace ConsoleApp5
 
                 var transactionId = response.Data;
                 num = 2;
+                //ClientInfoResponseModel infoResponseModel = JsonConvert.DeserializeObject<ClientInfoResponseModel>(transactionStr2);
                 return transactionId;
             }
             catch (Exception ex)
@@ -162,6 +166,56 @@ namespace ConsoleApp5
         }
       }
     }*/
+
+    public static string SaveTransaction(
+          ref Context context,
+          string CodeClient,
+          string NumeroCompte,
+          string NumeroCompteCredit,
+          int Note_10000,
+          int Note_5000,
+          int Note_2000,
+          int Note_1000,
+          int montant,
+          Guid kioskId,
+          string OpeRef,
+          string status,
+          int OpeType,
+          string Description
+          )
+    {
+            //string credentials = string.Format("{0}", context[(object)"PaymentContext.Payment.Account"]);
+            string apiUrl = $"{_baseUrl}/transactions";
+            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(BaseContext.UserName + ":" + BaseContext.Password));
+
+            string body = JsonConvert.SerializeObject((object) new
+            {
+                clientCode = CodeClient,
+                clientAccount = NumeroCompte,
+                creditAccount = NumeroCompteCredit,
+                operationRef = OpeRef,
+                status = Int32.Parse(status),
+                note_10000 = Note_10000,
+                note_5000 = Note_5000,
+                note_2000 = Note_2000,
+                note_1000 = Note_1000,
+                kioskId = kioskId.ToString(),
+                operationType = OpeType,
+                serviceId = ""//???
+            });
+
+            using (WebClient webClient = new WebClient())
+            {
+                ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)((_param1, _param2, _param3, _param4) => true);
+                webClient.Headers.Add("content-type", "application/json");
+                webClient.Headers.Add("Authorization", "Basic " + base64String);
+
+                string transactionStr2 = webClient.UploadString(apiUrl, "POST", body);
+                ClientInfoResponseModel infoResponseModel = JsonConvert.DeserializeObject<ClientInfoResponseModel>(transactionStr2);
+
+                return transactionStr2;
+            }
+    }
 
     public static KioskModel GetBorne(Guid id)
     {
