@@ -107,20 +107,19 @@ namespace PerfectGateway
               if (responseModel1.Data.CodeReponse == "100000")
               {
                 context.Status = IBP.SDKGatewayLibrary.State.AccountExists;
-               Logger.Instance.WriteMessage("\r\n\r\nDescription3 = " + responseModel1.Data.DetailReponse.ToString(), 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nDescription3 = " + responseModel1.Data.DetailReponse.ToString(), 1);
                 context.Description = responseModel1.Data.DetailReponse;
                 context[(object) "SoldeDisponible"] = (object) responseModel1.Data.SoldeDisponible;
                 context[(object) "ReferenceReponse"] = (object) responseModel1.Data.ReferenceReponse;
-               Logger.Instance.WriteMessage("\r\n\r\nConsultation de solde: " + (pinotp + " " + numerocompte + " " + context.Description + " " + responseModel1.Data.ReferenceReponse), 1);
-               Logger.Instance.WriteMessage("\r\n\r\nRequest status code3 = " + responseModel1.Data.CodeReponse.ToString(), 1);
-               Logger.Instance.WriteMessage("\r\n\r\nOpération réussie solde disponible3= " + responseModel1.Data.SoldeDisponible, 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nConsultation de solde: " + (pinotp + " " + numerocompte + " " + context.Description + " " + responseModel1.Data.ReferenceReponse), 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nRequest status code3 = " + responseModel1.Data.CodeReponse.ToString(), 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nOpération réussie solde disponible3= " + responseModel1.Data.SoldeDisponible, 1);
                 context[(object) "erreur"] = (object) context.Description;
-               Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + (CodeClient1 + " " + numerocompte + "   " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])) + " " + str2 + " " + context.Status.ToString() + " " + (object) 6 + " " + context.Description), 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + (CodeClient1 + " " + numerocompte + "   " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])) + " " + str2 + " " + context.Status.ToString() + " " + (object) 6 + " " + context.Description), 1);
+
                 BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
 
-                //CustomBillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
-               
-                Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + responseModel1.Data.SoldeDisponible, 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + responseModel1.Data.SoldeDisponible, 1);
                 break;
               }
               context.Status = IBP.SDKGatewayLibrary.State.AccountNotExists;
@@ -135,36 +134,36 @@ namespace PerfectGateway
               context.Status = this._statesMap.ContainsKey(responseModel2.Data.CodeReponse.ToString()) ? this._statesMap[responseModel2.Data.CodeReponse.ToString()] : IBP.SDKGatewayLibrary.State.Rejected;
               context.Description = responseModel2.Data.DetailReponse;
               context[(object) "ReferenceReponse"] = (object) responseModel2.Data.ReferenceReponse;
-             Logger.Instance.WriteMessage("\r\n\r\nOpération réussie response releve" + (object) responseModel2, 1);
+              //Logger.Instance.WriteMessage("\r\n\r\nOpération réussie response releve" + (object) responseModel2, 1);
               break;
             case RequestMethod.Depot:
               context.Status = IBP.SDKGatewayLibrary.State.AccountExists;
               context[(object) "PaymentContext.Payment.Account"] = (object) numerocompte;
-             Logger.Instance.WriteMessage("\r\n\r\nC'est un depot " + (requestMethod.ToString() + " " + pinotp), 1);
+              //Logger.Instance.WriteMessage("\r\n\r\nC'est un depot " + (requestMethod.ToString() + " " + pinotp), 1);
               break;
             case RequestMethod.Retrait:
               if (pinotp == "a" || pinotp == "")
               {
                 this.GenerateCode("RETRAITCOMPTE", numerocompte);
-               Logger.Instance.WriteMessage("\r\n\r\nRetrait otp Generation done2 ", 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nRetrait otp Generation done2 ", 1);
                 context.Status = IBP.SDKGatewayLibrary.State.AccountExists;
                 break;
               }
-             Logger.Instance.WriteMessage("\r\n\r\nRetrait started Pinotp : " + (pinotp + " Montant1: " + str1 + " Montant2: " + string.Format("{0}", context[(object) "Retrait"])), 1);
+              //Logger.Instance.WriteMessage("\r\n\r\nRetrait started Pinotp : " + (pinotp + " Montant1: " + str1 + " Montant2: " + string.Format("{0}", context[(object) "Retrait"])), 1);
               GatewayCore.BillCountResponse billCountToDispense = this.GetBillCountToDispense(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"]), str1);
               if (billCountToDispense.CanDispense)
               {
                 string fraisOperation = "0";
-               Logger.Instance.WriteMessage("\r\n\r\nRetrait Data: " + (str2 + " " + numerocompte + " " + str1 + " " + pinotp), 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nRetrait Data: " + (str2 + " " + numerocompte + " " + str1 + " " + pinotp), 1);
                 ResponseModel<RetraitCompteClientResponse> responseModel3 = Service.RetraitCompeClient(str2, numerocompte, str1, 22, fraisOperation, pinotp, "Retrait");
                 if (responseModel3.Data.DetailReponse == "SUCCESS")
                 {
-                 Logger.Instance.WriteMessage("\r\n\r\nAppel de l'api reussi  : ", 1);
+                  Logger.Instance.WriteMessage("\r\n\r\nAppel de l'api reussi  : ", 1);
                   context.Status = IBP.SDKGatewayLibrary.State.AccountExists;
                   context[(object) "PaymentContext.Payment.Account"] = (object) numerocompte;
-                 Logger.Instance.WriteMessage("\r\n\r\n before Withdraws status  " + context.Status.ToString(), 1);
+                  Logger.Instance.WriteMessage("\r\n\r\n before Withdraws status  " + context.Status.ToString(), 1);
                   context.Description = responseModel3.Data.DetailReponse;
-                 Logger.Instance.WriteMessage("\r\n\r\nWithdraws description  " + context.Description, 1);
+                  Logger.Instance.WriteMessage("\r\n\r\nWithdraws description  " + context.Description, 1);
                   context[(object) "SoldeCompte"] = (object) responseModel3.Data.SoldeCompte;
                   context[(object) "ReferenceReponse"] = (object) responseModel3.Data.ReferenceReponse;
                   context[(object) "Note_10000"] = (object) billCountToDispense.BillCount.Bill_10000;
@@ -173,10 +172,10 @@ namespace PerfectGateway
                   context[(object) "Note_1000"] = (object) billCountToDispense.BillCount.Bill_1000;
                   //this.UpdateBillCountFile(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"]), billCountToDispense.BillCount.Bill_10000, billCountToDispense.BillCount.Bill_5000, billCountToDispense.BillCount.Bill_2000, billCountToDispense.BillCount.Bill_1000);
                   BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", billCountToDispense.BillCount.Bill_10000, billCountToDispense.BillCount.Bill_5000, billCountToDispense.BillCount.Bill_2000, billCountToDispense.BillCount.Bill_1000, Convert.ToInt32(num), new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 8, context.Description);
-                 Logger.Instance.WriteMessage("\r\n\r\n AfterWithdraws status  " + context.Status.ToString(), 1);
+                  Logger.Instance.WriteMessage("\r\n\r\n AfterWithdraws status  " + context.Status.ToString(), 1);
                   this.canWihtdraw = "1";
-                 Logger.Instance.WriteMessage("\r\n\r\nAppel de l'api reussi  : " + this.canWihtdraw, 1);
-                 Logger.Instance.WriteMessage("\r\n\r\nSolde compte: " + context[(object) "SoldeCompte"], 1);
+                  Logger.Instance.WriteMessage("\r\n\r\nAppel de l'api reussi  : " + this.canWihtdraw, 1);
+                  Logger.Instance.WriteMessage("\r\n\r\nSolde compte: " + context[(object) "SoldeCompte"], 1);
                   context[(object) "erreur"] = (object) context.Description;
                   break;
                 }
@@ -186,7 +185,7 @@ namespace PerfectGateway
                 string mess = "\r\n\r\n before Withdraws status  " + status1.ToString();
                 instance.WriteMessage(mess, 1);
                 context.Description = responseModel3.Data.DetailReponse;
-               Logger.Instance.WriteMessage("\r\n\r\nWithdraws description  " + context.Description, 1);
+                Logger.Instance.WriteMessage("\r\n\r\nWithdraws description  " + context.Description, 1);
                 context[(object) "erreur"] = (object) context.Description;
                 Guid Id = Guid.NewGuid();
                 string CodeClient2 = CodeClient1;
