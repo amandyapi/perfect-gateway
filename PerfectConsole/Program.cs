@@ -45,8 +45,8 @@ namespace PerfectConsole
       context["Datefin"] = "20201006";
       context["PaymentContext.Payment.Point.Id"] = "C19FA571 - 9039 - 4D3F - 83F9 - 46D14237D93DE";
       context["PaymentContext.Payment.Value"] = "400";
-      context["Codeoperation"] = "22";
-      context["Method"] = "22";
+      context["Codeoperation"] = "1";
+      context["Method"] = "1";
       //settigs["21"] = "21";
       context["numeroCompteCredit"] = "25110300A010533701";
         
@@ -56,7 +56,7 @@ namespace PerfectConsole
       context["Retrait"] = 200;
       context["SelectedAccount"] = 1;
       context["nom"] = 0;
-      context["pinOtp"] = "";
+      context["PinOtp"] = "554";
       gatewayCore.CheckAccount(ref context);
       //gatewayCore.Process(ref context);
       gatewayCore.CheckAccount(ref context);
