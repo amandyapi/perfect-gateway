@@ -70,7 +70,7 @@ namespace ConsoleApp5
             )
         {
             int num;
-            string base_url = "http://sk-automate.tech/transactions";
+            string base_url = "https://www.sk-automate.tech/paymentsboapi";
 
             var body = new TransactionModel
             {

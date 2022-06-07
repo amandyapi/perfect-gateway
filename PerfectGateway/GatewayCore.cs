@@ -114,9 +114,9 @@ namespace PerfectGateway
                Logger.Instance.WriteMessage("\r\n\r\nConsultation de solde: " + (pinotp + " " + numerocompte + " " + context.Description + " " + responseModel1.Data.ReferenceReponse), 1);
                Logger.Instance.WriteMessage("\r\n\r\nRequest status code3 = " + responseModel1.Data.CodeReponse.ToString(), 1);
                Logger.Instance.WriteMessage("\r\n\r\nOpération réussie solde disponible3= " + responseModel1.Data.SoldeDisponible, 1);
-                context[(object) "erreur"] = (object) context.Description;
+               context[(object) "erreur"] = (object) context.Description;
                Logger.Instance.WriteMessage("\r\n\r\nReq 1= " + (CodeClient1 + " " + numerocompte + "   " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) 0 + " " + (object) new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])) + " " + str2 + " " + context.Status.ToString() + " " + (object) 6 + " " + context.Description), 1);
-                BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
+               BillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
 
                 //CustomBillHelper.Transaction(Guid.NewGuid(), CodeClient1, numerocompte, " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"])), str2, context.Status.ToString(), 1, context.Description);
                
