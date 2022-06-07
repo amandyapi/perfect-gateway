@@ -71,36 +71,46 @@ namespace ConsoleApp5
           string Description
             )
         {
-            var num = 1;
-            //string base_url = "http://sk-automate.tech/paymentsboapi";
-
-            var body = new TransactionModel
+            try
             {
-                clientCode = CodeClient,
-                clientAccount = NumeroCompte,
-                creditAccount = NumeroCompteCredit,
-                operationRef = OpeRef,
-                status = Int32.Parse(status),
-                note_10000 = Note_10000,
-                note_5000 = Note_5000,
-                note_2000 = Note_2000,
-                note_1000 = Note_1000,
-                kioskId = kioskId.ToString(),
-                operationType = OpeType,
-                serviceId = ""
-            };
+                var num = 1;
+                //string base_url = "http://sk-automate.tech/paymentsboapi";
+                num = 8;
+                var body = new TransactionModel
+                {
+                    clientCode = CodeClient,
+                    clientAccount = NumeroCompte,
+                    creditAccount = NumeroCompteCredit,
+                    operationRef = OpeRef,
+                    status = Int32.Parse(status),
+                    note_10000 = Note_10000,
+                    note_5000 = Note_5000,
+                    note_2000 = Note_2000,
+                    note_1000 = Note_1000,
+                    kioskId = kioskId.ToString(),
+                    operationType = OpeType,
+                    serviceId = ""
+                };
 
-            var basicToken = CustomBillHelper.GetBasicToken();
+                var basicToken = CustomBillHelper.GetBasicToken();
 
-            WebRequest request = WebRequest.Create($"{_baseUrl}/transactions");
+                WebRequest request = WebRequest.Create($"{_baseUrl}/transactions");
 
-            request.Headers.Add("Authorization", $"Basic {basicToken}");
-            num = 1;
-            var response = request.Execute<String>(body);
+                request.Headers.Add("Authorization", $"Basic {basicToken}");
+                num = 1;
+                var response = request.Execute<String>(body);
 
-            var transactionId = response.Data;
-            num = 2;
-            return transactionId;
+                var transactionId = response.Data;
+                num = 2;
+                return transactionId;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                //foreach (string trace in this._traces)
+                    //Logger.Instance.WriteMessage(trace, 1);
+                throw;
+            }
         }
 
     /*public static int Transaction(
