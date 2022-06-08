@@ -8,13 +8,3 @@ C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Release\PerfectGateway.csproj.C
 C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Release\PerfectGateway.dll
 C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Release\PerfectGateway.pdb
 C:\Users\SAMASSI\Desktop\Bizo\PerfectGateway\obj\Release\PerfectGateway.csprojAssemblyReference.cache
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\bin\Release\PerfectGateway.dll
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\bin\Release\PerfectGateway.pdb
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\bin\Release\Newtonsoft.Json.dll
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\bin\Release\SDKGatewayLibrary.dll
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\bin\Release\Newtonsoft.Json.xml
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\obj\Release\PerfectGateway.csproj.AssemblyReference.cache
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\obj\Release\PerfectGateway.csproj.CoreCompileInputs.cache
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\obj\Release\PerfectGateway.csproj.CopyComplete
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\obj\Release\PerfectGateway.dll
-D:\REPOSITORIES\sk-perfect-gateway\PerfectGateway\obj\Release\PerfectGateway.pdb
