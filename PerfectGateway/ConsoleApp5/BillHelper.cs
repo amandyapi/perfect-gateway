@@ -44,7 +44,7 @@ namespace ConsoleApp5
       stringBuilder.Append(string.Format("Modified = '{0}-{1}-{2} {3}:{4}' ", (object) dateTime.Year, (object) dateTime.Month, (object) dateTime.Day, (object) dateTime.Hour, (object) dateTime.Minute));
       stringBuilder.Append("WHERE Id = '" + id + "'");
       string cmdText = stringBuilder.ToString();
-      Logger.Instance.WriteMessage("\r\n\r\nSQL request " + cmdText, 1);
+      //Logger.Instance.WriteMessage("\r\n\r\nSQL request " + cmdText, 1);
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
         using (SqlCommand sqlCommand = new SqlCommand(cmdText, connection))
@@ -112,9 +112,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                    //Logger.Instance.WriteMessage(trace, 1);
+                    ////Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
         }
@@ -169,9 +169,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                //Logger.Instance.WriteMessage(trace, 1);
+                ////Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
         }
@@ -179,7 +179,7 @@ namespace ConsoleApp5
     public static KioskModel GetBorne(Guid id)
     {
       string sqlQuery = string.Format("SELECT * FROM [AdecDb].[monitoring].[Kiosks] WHERE Id = '{0}'", (object) id);
-      Logger.Instance.WriteMessage("\r\n\r\nSQL request " + sqlQuery, 1);
+      //Logger.Instance.WriteMessage("\r\n\r\nSQL request " + sqlQuery, 1);
       List<KioskModel> bornesData = BillHelper.GetBornesData(sqlQuery);
       return bornesData == null || !bornesData.Any<KioskModel>() ? (KioskModel) null : bornesData.FirstOrDefault<KioskModel>();
     }
