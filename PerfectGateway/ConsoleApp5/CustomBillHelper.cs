@@ -40,7 +40,7 @@ namespace ConsoleApp5
             stringBuilder.Append(string.Format("Modified = '{0}-{1}-{2} {3}:{4}' ", (object)dateTime.Year, (object)dateTime.Month, (object)dateTime.Day, (object)dateTime.Hour, (object)dateTime.Minute));
             stringBuilder.Append("WHERE Id = '" + id + "'");
             string cmdText = stringBuilder.ToString();
-            Logger.Instance.WriteMessage("\r\n\r\nSQL request " + cmdText, 1);
+            //Logger.Instance.WriteMessage("\r\n\r\nSQL request " + cmdText, 1);
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand sqlCommand = new SqlCommand(cmdText, connection))
@@ -140,7 +140,7 @@ namespace ConsoleApp5
             stringBuilder.Append(string.Format("{0},", (object)OpeType));
             stringBuilder.Append("'" + Description + "', NULL, NULL, NULL, NULL, NULL ) ");
             string cmdText = stringBuilder.ToString();
-            Logger.Instance.WriteMessage("\r\n\r\nSQL request " + cmdText, 1);
+            //Logger.Instance.WriteMessage("\r\n\r\nSQL request " + cmdText, 1);
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand sqlCommand = new SqlCommand(cmdText, connection))
@@ -156,7 +156,7 @@ namespace ConsoleApp5
         public static KioskModel GetBorne(Guid id)
         {
             string sqlQuery = string.Format("SELECT * FROM [AdecDb].[monitoring].[Kiosks] WHERE Id = '{0}'", (object)id);
-            Logger.Instance.WriteMessage("\r\n\r\nSQL request " + sqlQuery, 1);
+            //Logger.Instance.WriteMessage("\r\n\r\nSQL request " + sqlQuery, 1);
             List<KioskModel> bornesData = CustomBillHelper.GetBornesData(sqlQuery);
             return bornesData == null || !bornesData.Any<KioskModel>() ? (KioskModel)null : bornesData.FirstOrDefault<KioskModel>();
         }
