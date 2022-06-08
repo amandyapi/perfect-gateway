@@ -112,7 +112,7 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
                     //Logger.Instance.WriteMessage(trace, 1);
                 throw;
@@ -169,7 +169,7 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
                 //Logger.Instance.WriteMessage(trace, 1);
                 throw;
