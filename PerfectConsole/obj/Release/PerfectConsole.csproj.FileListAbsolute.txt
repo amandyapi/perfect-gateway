@@ -10,3 +10,14 @@ C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.csproj.C
 C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.csproj.CopyComplete
 C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.exe
 C:\Users\SAMASSI\Desktop\Bizo\PerfectConsole\obj\Release\PerfectConsole.pdb
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\bin\Release\PerfectConsole.exe
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\bin\Release\PerfectConsole.pdb
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\bin\Release\PerfectGateway.dll
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\bin\Release\Newtonsoft.Json.dll
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\bin\Release\PerfectGateway.pdb
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\bin\Release\Newtonsoft.Json.xml
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\obj\Release\PerfectConsole.csproj.AssemblyReference.cache
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\obj\Release\PerfectConsole.csproj.CoreCompileInputs.cache
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\obj\Release\PerfectConsole.csproj.CopyComplete
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\obj\Release\PerfectConsole.exe
+D:\REPOSITORIES\sk-perfect-gateway\PerfectConsole\obj\Release\PerfectConsole.pdb

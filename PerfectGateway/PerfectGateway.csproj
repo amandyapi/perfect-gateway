@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="CodeOperation.cs" />
     <Compile Include="ConsoleApp5\CustomBillHelper.cs" />
+    <Compile Include="WebRequestExtention.cs" />
+    <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="RequestMethod.cs" />
     <Compile Include="BaseContext.cs" />
     <Compile Include="GatewayCore.cs" />
@@ -79,7 +81,7 @@
     <Compile Include="Models\Details.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\ResponseBase.cs" />
-    <Compile Include="Models\ResponseModel`1.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\RetraitCompteClientRequest.cs" />
     <Compile Include="Models\RetraitCompteClientResponse.cs" />
     <Compile Include="Models\StatusModel.cs" />
