@@ -8,6 +8,7 @@ using ConsoleApp5;
 using IBP.SDKGatewayLibrary;
 using Newtonsoft.Json;
 using PerfectGateway.Models;
+using PerfectGateway.CustomModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -122,9 +123,10 @@ namespace PerfectGateway
 
     public override void CheckAccount(ref Context context)
     {
-       //var serviceId = GetServiceId(RequestMethod.ConsultationSolde);
-       //var transactionResultTest = BillHelper.Transaction(Guid.NewGuid(), "A0106544", "25111060A010654401", " ", 0, 0, 0, 0, 0, new Guid(string.Format("{0}", "84AB2908-6CE2-4927-BAFA-5C7B0FBB14B1")), "tralalalala", GetOperationStatus(IBP.SDKGatewayLibrary.State.AccountExists), 1, "Test Descrption", serviceId);
        //Logger.Instance.WriteMessage("\r\n\r\nPerfect Start check account kIOSK ID: " + string.Format("{0}", context[(object) "PaymentContext.Payment.Point.Id"]), 1);
+       //var MykioskId = string.Format("{0}", context[(object)"PaymentContext.Payment.Point.Id"]);
+       //var borne = BillHelper.GetBorne(MykioskId);
+       //var numero = 0;
       try
       {
         if (context[(object) "nom"].ToString() == "0")
@@ -168,7 +170,7 @@ namespace PerfectGateway
                 context.Status = IBP.SDKGatewayLibrary.State.AccountExists;
                 //Logger.Instance.WriteMessage("\r\n\r\nDescription3 = " + responseModel1.Data.DetailReponse.ToString(), 1);
                 context.Description = responseModel1.Data.DetailReponse;
-                context[(object) "SoldeDisponible"] = (object) responseModel1.Data.SoldeDisponible;
+                context[(object) "SoldeDisponible"] = (object)  responseModel1.Data.SoldeDisponible;
                 context[(object) "ReferenceReponse"] = (object) responseModel1.Data.ReferenceReponse;
                 //Logger.Instance.WriteMessage("\r\n\r\nConsultation de solde: " + (pinotp + " " + numerocompte + " " + context.Description + " " + responseModel1.Data.ReferenceReponse), 1);
                 //Logger.Instance.WriteMessage("\r\n\r\nRequest status code3 = " + responseModel1.Data.CodeReponse.ToString(), 1);
@@ -562,7 +564,7 @@ namespace PerfectGateway
           CanDispense = false
         };
       }
-      KioskModel borne = BillHelper.GetBorne(Id);
+      KiosksModel borne = BillHelper.GetBorne(Id);
       int num1 = 0;
       int num2 = 0;
       int num3 = 0;
@@ -624,7 +626,7 @@ namespace PerfectGateway
       int Bill_2000,
       int Bill_1000)
     {
-      KioskModel borne = BillHelper.GetBorne(Id);
+      KiosksModel borne = BillHelper.GetBorne(Id);
      //Logger.Instance.WriteMessage("\r\n\r\n Dispensed ATM Stock: " + (Bill_10000.ToString() + " " + (object) Bill_5000 + " " + (object) Bill_2000 + " " + (object) Bill_1000), 1);
      //Logger.Instance.WriteMessage("\r\n\r\nOld ATM Stock: " + (object) borne, 1);
       GatewayCore.BillCount billCount = new GatewayCore.BillCount()
@@ -634,7 +636,7 @@ namespace PerfectGateway
         Bill_2000 = borne.Note_2000 - Bill_2000,
         Bill_1000 = borne.Note_1000 - Bill_1000
       };
-      BillHelper.UpdateBorne(Id, billCount.Bill_1000, billCount.Bill_2000, billCount.Bill_5000, billCount.Bill_10000);
+      BillHelper.UpdateBorne(Id, billCount.Bill_1000, billCount.Bill_2000, billCount.Bill_5000, billCount.Bill_10000, 0);
      //Logger.Instance.WriteMessage("\r\n\r\nNew ATM Stock: " + (object) billCount, 1);
     }
 
