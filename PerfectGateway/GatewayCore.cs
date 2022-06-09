@@ -257,7 +257,7 @@ namespace PerfectGateway
                 status1 = context.Status;
                 string status2 = status1.ToString();
                 string description = context.Description;
-                BillHelper.Transaction(Id, CodeClient2, NumeroCompte, " ", 0, 0, 0, 0, int32, kioskId, OpeRef, GetOperationStatus(context.Status), 8, description, GetServiceId(RequestMethod.Retrait));
+                BillHelper.Transaction(Id, CodeClient2, NumeroCompte, " ", billCountToDispense.BillCount.Bill_10000, billCountToDispense.BillCount.Bill_5000, billCountToDispense.BillCount.Bill_2000, billCountToDispense.BillCount.Bill_1000, int32, kioskId, OpeRef, GetOperationStatus(context.Status), 8, description, GetServiceId(RequestMethod.Retrait));
                 break;
               }
               context.Status = IBP.SDKGatewayLibrary.State.AccountNotExists;
