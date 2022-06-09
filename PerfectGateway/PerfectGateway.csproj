@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="CodeOperation.cs" />
     <Compile Include="ConsoleApp5\CustomBillHelper.cs" />
+    <Compile Include="CustomModels\KiosksModel.cs" />
+    <Compile Include="CustomModels\KiosksUpdateModel.cs" />
     <Compile Include="WebRequestExtention.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="RequestMethod.cs" />
@@ -97,5 +99,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
