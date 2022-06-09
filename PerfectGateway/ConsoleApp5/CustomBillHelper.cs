@@ -53,6 +53,7 @@ namespace ConsoleApp5
             }
         }
 
+
         public static string Transaction(
           Guid Id,
           string CodeClient,
