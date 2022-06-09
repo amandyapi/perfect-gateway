@@ -45,8 +45,8 @@ namespace PerfectConsole
       context["Datefin"] = "20201006";
       context["PaymentContext.Payment.Point.Id"] = "84AB2908-6CE2-4927-BAFA-5C7B0FBB14B1";
       context["PaymentContext.Payment.Value"] = "400";
-      context["Codeoperation"] = "1";
-      context["Method"] = "1";
+      context["Codeoperation"] = "22";
+      context["Method"] = "22";
       //settigs["21"] = "21";
       context["numeroCompteCredit"] = "25110300A010533701";
         
