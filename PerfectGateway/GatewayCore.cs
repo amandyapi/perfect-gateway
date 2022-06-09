@@ -158,7 +158,6 @@ namespace PerfectGateway
             case RequestMethod.ConsultationSolde:
               if (pinotp == "0" || pinotp == "")
               {
-
                 this.GenerateCode("SOLDECOMPTECLIENT", numerocompte);
                 context.Status = IBP.SDKGatewayLibrary.State.AccountExists;
                 break;
