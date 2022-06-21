@@ -43,8 +43,6 @@ namespace ConsoleApp5
                     UpdateType = UpdateType,
                 };
 
-                var basicToken = CustomBillHelper.GetBasicToken();
-
                 var url = $"{_baseUrl}/kiosks/{Id}";
                 WebRequest request = WebRequest.Create(url);
 
@@ -57,9 +55,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                ////Logger.Instance.WriteMessage(trace, 1);
+                //Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
 
@@ -104,8 +102,6 @@ namespace ConsoleApp5
                     serviceId = ServiceId //consultation de solde
                 };
 
-                var basicToken = CustomBillHelper.GetBasicToken();
-
                 var url = $"{_baseUrl}/transactions";
                 WebRequest request = WebRequest.Create(url);
                 //var basicAuth = "Basic ZmluZWxsZTpGMW4zbExFQDJ+Iw==";
@@ -121,9 +117,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                ////Logger.Instance.WriteMessage(trace, 1);
+                //Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
         }
@@ -133,8 +129,6 @@ namespace ConsoleApp5
             try
             {
                 var num = 1;
-
-                var basicToken = CustomBillHelper.GetBasicToken();
 
                 var url = $"{_baseUrl}/kiosks/{id}";
                 WebRequest request = WebRequest.Create(url);
@@ -148,9 +142,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                //Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                ////Logger.Instance.WriteMessage(trace, 1);
+                //Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
         }

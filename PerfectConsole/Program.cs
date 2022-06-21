@@ -44,7 +44,7 @@ namespace PerfectConsole
       context["Datedebut"] = "20200727";
       context["Datefin"] = "20201006";
       context["PaymentContext.Payment.Point.Id"] = "84AB2908-6CE2-4927-BAFA-5C7B0FBB14B1";
-      context["PaymentContext.Payment.Value"] = "400";
+      context["PaymentContext.Payment.Value"] = "0";
       context["Codeoperation"] = "22";
       context["Method"] = "22";
       //settigs["21"] = "21";
@@ -53,7 +53,7 @@ namespace PerfectConsole
       context["FraisOperation"] = "0";
       context["PaymentContext.Payment.Number"] = Guid.NewGuid().ToString();
       context["CodeClient"] = "A0108128";
-      context["Retrait"] = 2000;
+      context["Retrait"] = 1000;
       context["SelectedAccount"] = 1;
       context["nom"] = 0;
       context["PinOtp"] = "";
