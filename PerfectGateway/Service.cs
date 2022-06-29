@@ -183,16 +183,16 @@ namespace PerfectGateway
             StreamReader streamReader = new StreamReader(responseStream);
             string end = streamReader.ReadToEnd();
             responseModel.Data = JsonConvert.DeserializeObject<T>(end);
-            //Logger.Instance.WriteMessage("\r\n\r\nResponse model data: " + responseModel.Data, 1);
+            ////Logger.Instance.WriteMessage("\r\n\r\nResponse model data: " + responseModel.Data, 1);
             streamReader.Close();
           }
         }
-        //Logger.Instance.WriteMessage("\r\n\r\nResponse model data: " + responseModel.Data, 1);
+        ////Logger.Instance.WriteMessage("\r\n\r\nResponse model data: " + responseModel.Data, 1);
         return responseModel;
       }
       catch (Exception ex)
       {
-        //Logger.Instance.WriteMessage("\r\n\r\nResponse model Exception: " + ex, 1);
+        ////Logger.Instance.WriteMessage("\r\n\r\nResponse model Exception: " + ex, 1);
 
         throw ex;
 

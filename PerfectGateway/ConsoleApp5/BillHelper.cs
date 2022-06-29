@@ -55,9 +55,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                ////Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                //Logger.Instance.WriteMessage(trace, 1);
+                //////Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
 
@@ -93,12 +93,14 @@ namespace ConsoleApp5
                     creditAccount = NumeroCompteCredit,
                     operationRef = OpeRef,
                     status = Int32.Parse(status),
+                    amount = montant,
                     note_10000 = Note_10000,
                     note_5000 = Note_5000,
                     note_2000 = Note_2000,
                     note_1000 = Note_1000,
                     kioskId = kioskId.ToString(),
                     operationType = OpeType,
+                    description = Description,
                     serviceId = ServiceId //consultation de solde
                 };
 
@@ -117,9 +119,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                ////Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                //Logger.Instance.WriteMessage(trace, 1);
+                //////Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
         }
@@ -142,9 +144,9 @@ namespace ConsoleApp5
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
+                ////Logger.Instance.WriteMessage("\r\n\r\nUne erreur est survenue " + (object)ex, 1);
                 //foreach (string trace in this._traces)
-                //Logger.Instance.WriteMessage(trace, 1);
+                //////Logger.Instance.WriteMessage(trace, 1);
                 throw;
             }
         }

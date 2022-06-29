@@ -12,6 +12,7 @@ namespace PerfectGateway.Models
         public string creditAccount { get; set; }
         public string operationRef { get; set; }
         public int status { get; set; }
+        public int amount { get; set; }
         public int note_10000 { get; set; }
         public int note_5000 { get; set; }
         public int note_2000 { get; set; }
@@ -19,6 +20,7 @@ namespace PerfectGateway.Models
         public string kioskId { get; set; }
         public int operationType { get; set; }
         public string serviceId { get; set; }
+        public string description { get; set; }
 
     }
 }
