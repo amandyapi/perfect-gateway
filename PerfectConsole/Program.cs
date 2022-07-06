@@ -39,7 +39,7 @@ namespace PerfectConsole
 
       // cosultation solde
       //context["PaymentContext.Payment.Account"] = "A0104631";A0108128  //"2511106025121000A01038460101";
-      context["PaymentContext.Payment.Account"] = "A0105069";
+      context["PaymentContext.Payment.Account"] = "A0108476"; //A0105069
       context["PaymentContext.Payment.Number"] = Guid.NewGuid().ToString();
       context["Datedebut"] = "20200727";
       context["Datefin"] = "20201006";
@@ -52,11 +52,11 @@ namespace PerfectConsole
         
       context["FraisOperation"] = "0";
       context["PaymentContext.Payment.Number"] = Guid.NewGuid().ToString();
-      context["CodeClient"] = "A0108128";
-      context["Retrait"] = 1000;
+      context["CodeClient"] = "A0108476";//A0108128
+            context["Retrait"] = 1000;
       context["SelectedAccount"] = 1;
       context["nom"] = 0;
-      context["PinOtp"] = "0909366";
+      context["PinOtp"] = "";
       gatewayCore.CheckAccount(ref context);
       //gatewayCore.Process(ref context);
       gatewayCore.CheckAccount(ref context);
