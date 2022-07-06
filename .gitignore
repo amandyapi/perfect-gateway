@@ -7,3 +7,7 @@
 /PerfectConsole/bin
 /PerfectConsole/obj
 /PerfectConsole/Properties
+*.exe
+*.exe
+*.pdb
+*.exe
